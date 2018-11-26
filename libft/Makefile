@@ -6,7 +6,7 @@
 #    By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/10 22:17:06 by amelikia          #+#    #+#              #
-#    Updated: 2018/11/01 14:43:53 by amelikia         ###   ########.fr        #
+#    Updated: 2018/11/25 17:15:53 by amelikia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,12 +106,6 @@ CFILES = ./ft_atoi.c \
 		./ft_strtrim.c \
 		./ft_tolower.c \
 		./ft_toupper.c \
-		./ft_lstadd.c \
-		./ft_lstdel.c \
-		./ft_lstdelone.c \
-		./ft_lstiter.c \
-		./ft_lstmap.c \
-		./ft_lstnew.c \
 		./ft_makestr.c \
 		./ft_itoa_base.c \
 		./ft_abs.c \
@@ -176,12 +170,6 @@ OFILES =   ./ft_atoi.o \
 		./ft_strtrim.o \
 		./ft_tolower.o \
 		./ft_toupper.o \
-		./ft_lstadd.o \
-		./ft_lstdel.o \
-		./ft_lstdelone.o \
-		./ft_lstiter.o \
-		./ft_lstmap.o \
-		./ft_lstnew.o \
 		./ft_makestr.o \
 		./ft_itoa_base.o \
 		./ft_abs.o \
