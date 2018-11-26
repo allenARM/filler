@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:22:25 by amelikia          #+#    #+#             */
-/*   Updated: 2018/11/25 17:22:34 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/11/25 20:57:57 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void	save_map(t_piece *piece, char *line, int spaces)
 {
 	int			k;
-	static int	j;
+	static int	j = 0;
 
 	k = 0;
-	j = 0;
 	piece->field[j] = (char*)malloc(sizeof(char) * (piece->width + 1));
 	while (k <= piece->width)
 	{
@@ -26,7 +25,7 @@ void	save_map(t_piece *piece, char *line, int spaces)
 		k++;
 	}
 	piece->field[j][k] = '\0';
-	b_printf("%s\n", piece->field[j]);
+	// b_printf("%s\n", piece->field[j]);
 	j++;
 }
 

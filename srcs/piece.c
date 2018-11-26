@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:21:41 by amelikia          #+#    #+#             */
-/*   Updated: 2018/11/25 17:22:03 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/11/25 20:54:43 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	fine_piece_size(t_piece *piece, char *line)
 	while (line[i] != ' ')
 		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
 	piece->height = ft_atoi(tmp);
-	b_printf("Height: %d\n", piece->height);
+	// b_printf("Height: %d\n", piece->height);
 	ft_bzero(tmp, 1);
 	while (line[i] != ':')
 		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
 	piece->width = ft_atoi(tmp);
-	b_printf("Width: %d\n", piece->width);
+	// b_printf("Width: %d\n", piece->width);
 	piece->size = piece->height * piece->width;
-	b_printf("Size: %d\n", piece->size);
+	// b_printf("Size: %d\n", piece->size);
 }
 
 void	size_of_piece(t_filler *filler, char *line)
