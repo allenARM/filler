@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "filler.h"
+
 void	save_map(t_piece *piece, char *line, int spaces)
 {
 	int			k;
@@ -33,13 +35,13 @@ void	plateau(t_filler *filler, char *line)
 	if (ft_strncmp(line, "Plateau", 7) == 0)
 	{
 		filler->map = (t_piece*)malloc(sizeof(t_piece));
-		finepiecesize(filler->map, line);
+		fine_piece_size(filler->map, line);
 	}
 	if (line[3] == ' ')
 	{
 		filler->map->field = (char**)malloc(sizeof(char*)\
 			* (filler->map->height));
 		filler->map->field[filler->map->height] = NULL;
-		savemap(filler->map, line, 4);
+		save_map(filler->map, line, 4);
 	}
 }

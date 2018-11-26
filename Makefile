@@ -31,7 +31,7 @@ $(EXEC):
 	@if [ ! -d "./obj" ]; then mkdir -p $(OBJ); fi
 	@echo "$(GREEN)Moving objects files for $(GREEN_EXTRA)$(LIB_FILLLER)$(GREEN) to $(OBJ)$(RESET)"
 	@mv *.o $(OBJ)
-	@make -C libft
+	#@make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC)$(RESET)"
 	@gcc -Wall -Wextra -Werror $(LIB_FILLLER) $(LIBFT) $(INCLUDES) -o $(EXEC)
 	@echo "$(BLUE_EXTRA)$(EXEC)$(BLUE): Complete$(RESET)"
@@ -41,7 +41,7 @@ clean:
 	echo "$(RED)Deleting objects for $(RED_EXTRA)$(LIB_FILLLER)$(RESET)"; \
 	/bin/rm -rf $(OBJ); \
 	fi
-	@make -C libft clean
+	#@make -C libft clean
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
 fclean: clean
@@ -55,7 +55,7 @@ fclean: clean
 	/bin/rm -f $(EXEC); \
 	fi
 
-	@make -C libft fclean
+	#@make -C libft fclean
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"
 
 re: fclean all

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	finepiecesize(t_piece *piece, char *line)
+#include "filler.h"
+
+void	fine_piece_size(t_piece *piece, char *line)
 {
 	char		*tmp;
 	int			j;
@@ -23,12 +25,12 @@ void	finepiecesize(t_piece *piece, char *line)
 		i++;
 	i++;
 	while (line[i] != ' ')
-		tmp = ft_strjoin(tmp, makestr(line[i++]));
+		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
 	piece->height = ft_atoi(tmp);
 	b_printf("Height: %d\n", piece->height);
 	ft_bzero(tmp, 1);
 	while (line[i] != ':')
-		tmp = ft_strjoin(tmp, makestr(line[i++]));
+		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
 	piece->width = ft_atoi(tmp);
 	b_printf("Width: %d\n", piece->width);
 	piece->size = piece->height * piece->width;
@@ -40,7 +42,7 @@ void	size_of_piece(t_filler *filler, char *line)
 	if (ft_strncmp(line, "Piece", 5) == 0)
 	{
 		filler->piece = (t_piece*)malloc(sizeof(t_piece));
-		finepiecesize(filler->piece, line);
+		fine_piece_size(filler->piece, line);
 	}
 }
 
@@ -49,5 +51,5 @@ void	piece(t_filler *filler, char *line)
 	filler->piece->field = (char**)malloc(sizeof(char*)\
 		* (filler->piece->height));
 	filler->piece->field[filler->piece->height] = NULL;
-	savemap(filler->piece, line, 0);
+	save_map(filler->piece, line, 0);
 }

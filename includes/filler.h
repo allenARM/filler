@@ -12,8 +12,8 @@
 
 #ifndef FILLER_H
 # define FILLER_H
-# include "libft/libft.h"
-# include "b_printf/includes/printf.h"
+# include "../libft/libft.h"
+# include "../libft/header.h"
 
 typedef struct	s_point
 {
@@ -45,7 +45,7 @@ typedef	struct	s_filler
 	int			is_on;
 }				t_filler;
 
-void			finepiecesize(t_piece *piece, char *line);
+void			fine_piece_size(t_piece *piece, char *line);
 void			size_of_piece(t_filler *filler, char *line);
 void			piece(t_filler *filler, char *line);
 void			save_map(t_piece *piece, char *line, int spaces);
