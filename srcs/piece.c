@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:21:41 by amelikia          #+#    #+#             */
-/*   Updated: 2018/11/25 20:54:43 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/11/25 22:01:55 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,20 @@
 
 void	fine_piece_size(t_piece *piece, char *line)
 {
-	char		*tmp;
-	int			j;
 	int			i;
 
-	j = 0;
 	i = 0;
-	tmp = ft_strnew(1);
-	while (line[i] != ' ')
-		i++;
-	i++;
-	while (line[i] != ' ')
-		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
-	piece->height = ft_atoi(tmp);
-	// b_printf("Height: %d\n", piece->height);
-	ft_bzero(tmp, 1);
-	while (line[i] != ':')
-		tmp = ft_strjoin(tmp, ft_makestr(line[i++]));
-	piece->width = ft_atoi(tmp);
-	// b_printf("Width: %d\n", piece->width);
+	while (ft_isdigit(line[i]) == 0)
+		++i;
+	piece->height = ft_atoi(&line[i]);
+	while (ft_isdigit(line[i]) == 1)
+		++i;
+	++i;
+	piece->width = ft_atoi(&line[i]);
+	// ft_printf("\nHeight: %d\n", piece->height);
+	// ft_printf("Width: %d\n", piece->width);
 	piece->size = piece->height * piece->width;
-	// b_printf("Size: %d\n", piece->size);
+	// ft_printf("Size: %d\n\n", piece->size);
 }
 
 void	size_of_piece(t_filler *filler, char *line)
