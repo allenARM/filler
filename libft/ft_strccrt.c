@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strccrt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/26 16:03:33 by amelikia          #+#    #+#             */
-/*   Updated: 2018/10/26 16:06:03 by amelikia         ###   ########.fr       */
+/*   Created: 2018/10/25 15:21:43 by knaumov           #+#    #+#             */
+/*   Updated: 2018/10/25 15:29:46 by knaumov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strccrt(const char *str, char c)
 		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != c)
-		i++;
+		++i;
 	if (ft_strlen(str) == i - 1)
 		return (NULL);
 	new = (char *)malloc(sizeof(char) * i + 1);
@@ -30,7 +30,7 @@ char	*ft_strccrt(const char *str, char c)
 	while (j < i)
 	{
 		new[j] = str[j];
-		j++;
+		++j;
 	}
 	new[j] = '\0';
 	return (new);

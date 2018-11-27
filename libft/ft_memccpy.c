@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amelikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/23 15:06:52 by amelikia          #+#    #+#             */
-/*   Updated: 2018/10/11 15:48:34 by amelikia         ###   ########.fr       */
+/*   Created: 2018/09/18 18:55:31 by knaumov           #+#    #+#             */
+/*   Updated: 2018/10/03 16:55:53 by knaumov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *restrict dst,
-		const void *restrict src, int c, size_t n)
+void	*ft_memccpy(void *restrict dst, const void *restrict src, int c, \
+		size_t n)
 {
 	size_t			i;
 	unsigned char	*source;

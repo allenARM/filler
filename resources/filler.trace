@@ -1,2 +1,5 @@
-seed = 887
-O: timedout
+seed = 4392
+../login.filler: Segfault at 0
+players/champely.filler won
+Score:
+0AGAINST0

@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amelikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/10 19:24:15 by amelikia          #+#    #+#             */
-/*   Updated: 2018/10/11 17:27:30 by amelikia         ###   ########.fr       */
+/*   Created: 2018/09/18 16:37:31 by knaumov           #+#    #+#             */
+/*   Updated: 2018/10/03 17:03:35 by knaumov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	char	*b;
 	char	*l;
 	char	*b_begin;
 
-	l = (char*)needle;
+	l = (char*)little;
 	if (*l == 0)
-		return ((char*)haystack);
-	b_begin = (char*)haystack;
-	while ((*haystack) && ((size_t)(haystack - b_begin) < len))
+		return ((char*)big);
+	b_begin = (char*)big;
+	while ((*big) && ((size_t)(big - b_begin) < len))
 	{
-		b = (char*)haystack;
-		if (*b == *needle)
+		b = (char*)big;
+		if (*b == *little)
 		{
-			l = (char*)needle;
+			l = (char*)little;
 			while ((*b == *l) && ((size_t)(b - b_begin) < len))
 			{
 				b++;
 				l++;
 				if (*l == 0)
-					return ((char*)haystack);
+					return ((char*)big);
 			}
 		}
-		haystack++;
+		big++;
 	}
 	return (NULL);
 }
