@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int	reading_loop(t_filler *filler)
+int	reading_loop(t_filler filler)
 {
 	char	*line;
 	int		res;
@@ -21,12 +21,12 @@ int	reading_loop(t_filler *filler)
 	{
 		if (!ft_strncmp(line, "Plateau", 6))
 		{
-			read_map(line, filler);
+			read_map(line, &filler);
 			ft_strdel(&line);
 		}
 		else if (!ft_strncmp(line, "Piece", 4))
 		{
-			read_piece(line, filler);
+			read_piece(line, &filler);
 			return (1);
 		}
 		else
@@ -37,30 +37,30 @@ int	reading_loop(t_filler *filler)
 
 int		main(void)
 {
-	t_filler	*filler;
+	t_filler	filler;
 	char		*line;
 
 	line = NULL;
-	filler = malloc(sizeof(t_filler));
+	ft_bzero(&filler, sizeof(t_filler));
 	if (get_next_line(0, &line) && ft_strlen(line) > 10 && \
 			ft_strncmp(line, "$$$ exec p", 10) == 0 && (line[10] == '1' \
 			|| line[10] == '2'))
 	{
 		if (line[10] == '1')
 		{
-			filler->enemy.symbol = 'O';
-			filler->player.symbol = 'X';
+			filler.enemy.symbol = 'O';
+			filler.player.symbol = 'X';
 		}
 		else
 		{
-			filler->player.symbol = 'O';
-			filler->enemy.symbol = 'X';
+			filler.player.symbol = 'O';
+			filler.enemy.symbol = 'X';
 		}
 		ft_strdel(&line);
 		while (1)
 		{
 			reading_loop(filler);
-			write(1, "8 2\n", 4);
+			solver(filler);
 		}
 	}
 	return (0);

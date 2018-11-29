@@ -48,5 +48,6 @@ void	find_dimenshions(char *line, t_piece *piece);
 int			read_map(char *line, t_filler *filler);
 int			read_piece(char *line, t_filler *filler);
 void	free_filler(t_filler *filler);
+int         solver(t_filler filler);
 
 #endif

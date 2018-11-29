@@ -20,7 +20,6 @@ int			read_map(char *line, t_filler *filler)
 	int		i;
 
 	find_dimenshions(line, &(filler->map));
-	ft_strdel(&line);
 	get_next_line(0, &line);
 	ft_strdel(&line);
 	filler->map.field = (char **)malloc(sizeof(char *) * (filler->map.height + 1));	
