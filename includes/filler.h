@@ -45,8 +45,8 @@ typedef	struct	s_filler
 }				t_filler;
 
 void	find_dimenshions(char *line, t_piece *piece);
-int			read_map(char *line, t_filler *filler);
-int			read_piece(char *line, t_filler *filler);
+int			read_map(char *line, t_piece *map);
+int			read_piece(char *line, t_piece *piece);
 void	free_filler(t_filler *filler);
 int         solver(t_filler filler);
 

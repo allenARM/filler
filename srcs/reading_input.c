@@ -15,38 +15,38 @@ void	find_dimenshions(char *line, t_piece *piece)
 	piece->size = piece->height * piece->width;
 }
 
-int			read_map(char *line, t_filler *filler)
+int			read_map(char *line, t_piece *map)
 {
 	int		i;
 
-	find_dimenshions(line, &(filler->map));
+	find_dimenshions(line, map);
 	get_next_line(0, &line);
 	ft_strdel(&line);
-	filler->map.field = (char **)malloc(sizeof(char *) * (filler->map.height + 1));	
+	map->field = (char **)malloc(sizeof(char *) * map->height + 1);	
 	i = 0;
-	while (i < filler->map.height)
+	while (i < map->height)
 	{
 		get_next_line(0, &line);
-		filler->map.field[i] = ft_strdup((const char *)(&line[4]));
+		map->field[i] = ft_strdup((const char *)(&line[4]));
 		ft_strdel(&line);
 		++i;
 	}
 	return (0);
 }
 
-int			read_piece(char *line, t_filler *filler)
+int			read_piece(char *line, t_piece *piece)
 {
 	int		i;
 
-	find_dimenshions(line, &(filler->piece));
+	find_dimenshions(line, piece);
 	ft_strdel(&line);
-	filler->piece.field = (char **)malloc(sizeof(char *) * (filler->piece.height + 1));
+	piece->field = (char **)malloc(sizeof(char *) * piece->height + 1);
 	i = 0;
-	while (i < filler->piece.height)
+	while (i < piece->height)
 	{
 		get_next_line(0, &line);
-		filler->piece.field[i] = (char *)malloc(sizeof(char *) * (filler->piece.width + 1));
-		filler->piece.field[i] = ft_strcpy(filler->piece.field[i], (const char *)line);
+		piece->field[i] = (char *)malloc(sizeof(char *) * (piece->width + 1));
+		piece->field[i] = ft_strcpy(piece->field[i], (const char *)line);
 		ft_strdel(&line);
 		++i;
 

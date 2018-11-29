@@ -21,12 +21,12 @@ int	reading_loop(t_filler filler)
 	{
 		if (!ft_strncmp(line, "Plateau", 6))
 		{
-			read_map(line, &filler);
+			read_map(line, &filler.map);
 			ft_strdel(&line);
 		}
 		else if (!ft_strncmp(line, "Piece", 4))
 		{
-			read_piece(line, &filler);
+			read_piece(line, &filler.piece);
 			return (1);
 		}
 		else

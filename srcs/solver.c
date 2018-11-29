@@ -73,7 +73,6 @@ int         solver(t_filler filler)
     answer = NULL;
     
     t_filler temp;
-
     temp = filler;
 
     // int i;
