@@ -1,6 +1,6 @@
 #include "filler.h"
 
-int         check_placement(t_filler filler, int i, int j)
+int         check_placement(t_filler *filler, int i, int j)
 {
     int     i_piece;
     int     j_piece;
@@ -9,18 +9,18 @@ int         check_placement(t_filler filler, int i, int j)
     i_piece = 0;
     j_piece = 0;
     count = 0;
-    while (filler.piece.field[i_piece])
+    while (filler->piece.field[i_piece])
     {
         j_piece = 0;
-        while (filler.piece.field[i_piece][j_piece])
+        while (filler->piece.field[i_piece][j_piece])
         {
-            if (filler.piece.field[i_piece][j_piece] == '*')
+            if (filler->piece.field[i_piece][j_piece] == '*')
             {
-                if (filler.map.field[i_piece + i][j_piece + j])
+                if (filler->map.field[i_piece + i][j_piece + j])
                 {
-                    if (filler.map.field[i_piece + i][j_piece + j] == filler.player.symbol || filler.map.field[i_piece + i][j_piece + j] == filler.player.symbol + 32)
+                    if (filler->map.field[i_piece + i][j_piece + j] == filler->player.symbol || filler->map.field[i_piece + i][j_piece + j] == filler->player.symbol + 32)
                         ++count;
-                    if (filler.map.field[i_piece + i][j_piece + j] == filler.enemy.symbol || filler.map.field[i_piece + i][j_piece + j] == filler.enemy.symbol + 32)
+                    if (filler->map.field[i_piece + i][j_piece + j] == filler->enemy.symbol || filler->map.field[i_piece + i][j_piece + j] == filler->enemy.symbol + 32)
                         return (0);
                 }
                 else
@@ -35,7 +35,7 @@ int         check_placement(t_filler filler, int i, int j)
     return (0);
 }
 
-t_point     *simple_placing(t_filler filler)
+t_point     *simple_placing(t_filler *filler)
 {
     t_point     *answer;
     int         i;
@@ -44,11 +44,10 @@ t_point     *simple_placing(t_filler filler)
     i = 0;
     j = 0;
     answer = malloc(sizeof(t_point *));
-    answer = NULL;
-    while (filler.map.field[i])
+    while (filler->map.field[i])
     {
         j = 0;
-        while (filler.map.field[i][j])
+        while (filler->map.field[i][j])
         {
             if (check_placement(filler, i, j) == 1)
             {
@@ -60,31 +59,33 @@ t_point     *simple_placing(t_filler filler)
         }
         ++i;
     }
-    answer->y = 0;
-    answer->x = 0;
+    answer->y = 8;
+    answer->x = 2;
     return(answer);
 }
 
-int         solver(t_filler filler)
+int         solver(t_filler *filler)
 {
-    t_point     *answer;
+  t_point     *answer;
 
-    answer = malloc(sizeof(t_point *));
-    answer = NULL;
-    
-    t_filler temp;
-    temp = filler;
+  answer = malloc(sizeof(t_point *));
+  // answer = NULL;
 
-    // int i;
-    // i = 0;
-    // while (filler.map.field[i])
-    //     ft_printf("%s\n", filler.map.field[i++]);
-    // i = 0;
-    // while (filler.piece.field[i])
-    //     ft_printf("%s\n", filler.piece.field[i++]);
+  // t_filler temp;
+  // temp = filler;
 
-    // answer = simple_placing(filler);
-    // ft_printf("%d %d\n", answer->y, answer->x);
-    write(1, "8 2\n", 4);
-    return (0);
+  // int i;
+  // i = 0;
+  // while (filler->map.field[i])
+  //     ft_printf("%s\n", filler->map.field[i++]);
+  // i = 0;
+	// ft_printf("|\n");
+  // while (filler->piece.field[i])
+  //     ft_printf("%s\n", filler->piece.field[i++]);
+
+  answer = simple_placing(filler);
+
+  ft_printf("%d %d\n", answer->y, answer->x);
+  // write(1, "8 2\n", 4);
+  return (0);
 }

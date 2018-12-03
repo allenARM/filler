@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: amelikia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/10 13:23:50 by knaumov           #+#    #+#             */
-/*   Updated: 2018/10/03 17:00:19 by knaumov          ###   ########.fr       */
+/*   Created: 2018/09/10 18:26:50 by amelikia          #+#    #+#             */
+/*   Updated: 2018/09/11 14:54:10 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dst, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	size_t	source_len;
-	char	*result;
+	int i;
 
-	source_len = ft_strlen(src) + 1;
-	result = (char *)ft_memcpy(dst, src, source_len);
-	return (result);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

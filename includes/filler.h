@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 18:39:51 by amelikia          #+#    #+#             */
-/*   Updated: 2018/11/25 17:24:51 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/02 15:47:54 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef	struct	s_filler
 
 void	find_dimenshions(char *line, t_piece *piece);
 int			read_map(char *line, t_piece *map);
-int			read_piece(char *line, t_piece *piece);
+int			read_piece(char *line, t_filler *filler);
 void	free_filler(t_filler *filler);
-int         solver(t_filler filler);
+int         solver(t_filler *filler);
 
 #endif

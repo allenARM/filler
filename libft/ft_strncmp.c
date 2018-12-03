@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: amelikia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/10 12:49:58 by knaumov           #+#    #+#             */
-/*   Updated: 2018/10/03 17:02:59 by knaumov          ###   ########.fr       */
+/*   Created: 2018/10/10 19:30:10 by amelikia          #+#    #+#             */
+/*   Updated: 2018/10/11 17:29:07 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n)
+	if (n == 0)
+		return (0);
+	while (s1[i] == s2[i] && s1[i] && s2[i] && i < n - 1)
 		i++;
-	if (i == n)
-		return (0);
-	if (s1[i] != s2[i])
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	else
-		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

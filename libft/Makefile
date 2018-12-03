@@ -3,15 +3,58 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: knaumov <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/09/10 09:50:35 by knaumov           #+#    #+#              #
-#    Updated: 2018/11/26 18:07:48 by knaumov          ###   ########.fr        #
+#    Created: 2018/09/10 22:17:06 by amelikia          #+#    #+#              #
+#    Updated: 2018/11/27 14:49:57 by amelikia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-FILES = ./ft_atoi.c \
+CFLAGS = -Wall -Werror -Wextra
+HEADER = libft.h
+
+PRINTF_CFILES = ft_printf.c \
+								src/ft_itoa_intmax.c \
+								src/ft_itoa_base_unsigned.c \
+								src/ft_itoa_unsigned.c \
+								src/conversion_b_p.c \
+								src/conversion_c_s.c \
+								src/conversion_num.c \
+								src/conversion_o_x.c \
+								src/fn_struct.c \
+								src/ftprintf_helper.c \
+								src/minus_plus_space.c \
+								src/parse_data.c \
+								src/parse_format.c \
+								src/parse_type.c \
+								src/parse_w_and_a.c \
+								src/precision.c \
+								src/type_define.c \
+								src/wide_s.c \
+								src/width.c \
+
+PRINTF_OFILES = ft_printf.o \
+								ft_itoa_intmax.o \
+								ft_itoa_base_unsigned.o \
+								ft_itoa_unsigned.o \
+								conversion_b_p.o \
+								conversion_c_s.o \
+								conversion_num.o \
+								conversion_o_x.o \
+								fn_struct.o\
+								ftprintf_helper.o \
+								minus_plus_space.o \
+								parse_data.o \
+								parse_format.o \
+								parse_type.o \
+								parse_w_and_a.o \
+								precision.o \
+								type_define.o \
+								wide_s.o \
+								width.o \
+
+CFILES = ./ft_atoi.c \
 		./ft_bzero.c \
 		./ft_isalnum.c \
 		./ft_isalpha.c \
@@ -36,7 +79,6 @@ FILES = ./ft_atoi.c \
 		./ft_putstr.c \
 		./ft_putstr_fd.c \
 		./ft_strcat.c \
-		./ft_strsch.c \
 		./ft_strchr.c \
 		./ft_strclr.c \
 		./ft_strcmp.c \
@@ -64,54 +106,21 @@ FILES = ./ft_atoi.c \
 		./ft_strtrim.c \
 		./ft_tolower.c \
 		./ft_toupper.c \
+		./ft_makestr.c \
 		./ft_itoa_base.c \
+		./ft_abs.c \
 		./get_next_line.c \
-		./ft_putunsignedint.c \
+		./b_printf.c \
+		./ft_sizeofint.c \
 		./ft_strccrt.c \
-		./ft_bchar.c \
 		./ft_update.c \
+		./ft_strchrfill.c \
+		./ft_bchar.c \
 		./ft_strtoupper.c \
-		./ft_strtolower.c \
-		./ft_putwchar.c \
-		./ft_putwchar_fd.c \
-		./ft_putwstr.c \
-		./ft_putwstr_fd.c \
-		./ft_wstrlen.c \
-		./ft_wstrdup.c \
-		./ft_wchrlen.c \
-		./ft_strcon.c \
 		./ft_clean_arr.c \
 		./ft_create_arr.c \
-		./ft_printf/adding_minus.c \
-		./ft_printf/adding_plus.c \
-		./ft_printf/adding_precision_number.c \
-		./ft_printf/adding_precision_string.c \
-		./ft_printf/adding_space.c \
-		./ft_printf/adding_width.c \
-		./ft_printf/adding_width_null_char.c \
-		./ft_printf/conversion_b.c \
-		./ft_printf/conversion_c.c \
-		./ft_printf/conversion_d_i.c \
-		./ft_printf/conversion_o_cap_o.c \
-		./ft_printf/conversion_p.c \
-		./ft_printf/conversion_s.c \
-		./ft_printf/conversion_u_cap_d_cap_u.c \
-		./ft_printf/conversion_wide_c.c \
-		./ft_printf/conversion_wide_s.c \
-		./ft_printf/conversion_x_cap_x.c \
-		./ft_printf/conversions.c \
-		./ft_printf/ft_itoa_base_unsigned.c \
-		./ft_printf/ft_itoa_intmax.c \
-		./ft_printf/ft_itoa_unsigned.c \
-		./ft_printf/ft_printf.c \
-		./ft_printf/handle_flags.c \
-		./ft_printf/handle_format.c \
-		./ft_printf/handle_precision.c \
-		./ft_printf/handle_width.c \
-		./ft_printf/parse_flags.c \
-		./ft_printf/printing_wide_string.c
 
-OBJ =   ./ft_atoi.o \
+OFILES =   ./ft_atoi.o \
 		./ft_bzero.o \
 		./ft_isalnum.o \
 		./ft_isalpha.o \
@@ -136,7 +145,6 @@ OBJ =   ./ft_atoi.o \
 		./ft_putstr.o \
 		./ft_putstr_fd.o \
 		./ft_strcat.o \
-		./ft_strsch.o \
 		./ft_strchr.o \
 		./ft_strclr.o \
 		./ft_strcmp.o \
@@ -164,79 +172,32 @@ OBJ =   ./ft_atoi.o \
 		./ft_strtrim.o \
 		./ft_tolower.o \
 		./ft_toupper.o \
+		./ft_makestr.o \
 		./ft_itoa_base.o \
+		./ft_abs.o \
 		./get_next_line.o \
-		./ft_putunsignedint.o \
+		./b_printf.o \
+		./ft_sizeofint.o \
 		./ft_strccrt.o \
-		./ft_bchar.o \
 		./ft_update.o \
+		./ft_strchrfill.o \
+		./ft_bchar.o \
 		./ft_strtoupper.o \
-		./ft_strtolower.o \
-		./ft_putwchar.o \
-		./ft_putwchar_fd.o \
-		./ft_putwstr.o \
-		./ft_putwstr_fd.o \
-		./ft_wstrlen.o \
-		./ft_wstrdup.o \
-		./ft_wchrlen.o \
-		./ft_strcon.o \
-		./adding_minus.o \
-		./adding_plus.o \
-		./adding_precision_number.o \
-		./adding_precision_string.o \
-		./adding_space.o \
-		./adding_width.o \
-		./adding_width_null_char.o \
-		./conversion_b.o \
-		./conversion_c.o \
-		./conversion_d_i.o \
-		./conversion_o_cap_o.o \
-		./conversion_p.o \
-		./conversion_s.o \
-		./conversion_u_cap_d_cap_u.o \
-		./conversion_wide_c.o \
-		./conversion_wide_s.o \
-		./conversion_x_cap_x.o \
-		./conversions.o \
-		./ft_itoa_base_unsigned.o \
-		./ft_itoa_intmax.o \
-		./ft_itoa_unsigned.o \
-		./ft_printf.o \
-		./handle_flags.o \
-		./handle_format.o \
-		./handle_precision.o \
-		./handle_width.o \
-		./parse_flags.o \
-		./printing_wide_string.o \
 		./ft_clean_arr.o \
-		./ft_create_arr.o
-
-RESET = \033[0m
-RED = \033[0;31m
-GREEN = \033[0;32m
-BLUE = \033[0;36m
-RED_EXTRA = \033[1;31m
-GREEN_EXTRA = \033[1;32m
-BLUE_EXTRA = \033[1;36m
+		./ft_create_arr.o \
 
 all: $(NAME)
 
 $(NAME):
-	@echo "$(GREEN_EXTRA)   Libft: $(GREEN)Making objects for $(GREEN_EXTRA)libft.a$(RESET)"
-	@gcc -Wall -Wextra -Werror -c $(FILES)
-	@echo "$(GREEN_EXTRA)   Libft: $(GREEN)Compiling $(GREEN_EXTRA)libft.a$(RESET)"
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "$(BLUE_EXTRA)   Libft: $(NAME)$(BLUE): Complete$(RESET)"
+	gcc $(CFLAGS) -I$(HEADER) -c $(CFILES) $(PRINTF_CFILES)
+	ar rc $(NAME) $(OFILES) $(PRINTF_OFILES)
+	ranlib $(NAME)
 
 clean:
-	@if [ -a "./ft_atoi.o" ]; then echo "$(RED_EXTRA)   Libft: $(RED)Deleting objects for $(RED_EXTRA)libft.a$(RESET)"; fi
-	@if [ -a "./ft_atoi.o" ]; then /bin/rm -f $(OBJ); fi
-	@echo "$(BLUE_EXTRA)   Libft: clean$(BLUE): Complete$(RESET)"
+	/bin/rm -f $(OFILES)
+	/bin/rm -f $(PRINTF_OFILES)
 
 fclean: clean
-	@if [ -a "$(NAME)" ]; then echo "$(RED_EXTRA)   Libft: $(RED)Deleting $(RED_EXTRA)libft.a$(RESET)"; fi
-	@if [ -a "$(NAME)" ]; then /bin/rm -f $(NAME); fi
-	@echo "$(BLUE_EXTRA)   Libft: fclean$(BLUE): Complete$(RESET)"
+	/bin/rm -f $(NAME)
 
-re:	fclean all
+re: fclean all
