@@ -530,6 +530,7 @@ if __FILE__ == $0
 						end
 					rescue Timeout::Error
 						puts "Player with #{player.piece_char}: timedout"
+						puts "Ho-ho-ho-ho"
 						trace.trace_msg "#{player.piece_char}: timedout\n"
 						player.end_player trace
 					end
