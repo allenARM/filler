@@ -6,11 +6,32 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:19:28 by amelikia          #+#    #+#             */
-/*   Updated: 2018/12/03 22:19:29 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/04 15:00:09 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+int		small_check(t_filler *filler, int i, int j, int *count)
+{
+	if (i < filler->map_y && j < filler->map_x)
+	{
+		if (filler->map[i][j])
+		{
+			if (filler->map[i][j] == filler->player || \
+				filler->map[i][j] == filler->player + 32)
+				(*count)++;
+			if (filler->map[i][j] == filler->enemy || \
+				filler->map[i][j] == filler->enemy + 32)
+				return (0);
+		}
+		else
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
 
 int		check_placement(t_filler *filler, int i, int j)
 {
@@ -27,22 +48,8 @@ int		check_placement(t_filler *filler, int i, int j)
 		while (filler->piece[i_piece][j_piece])
 		{
 			if (filler->piece[i_piece][j_piece] == '*')
-			{
-				if (i_piece + i < filler->map_y && j_piece + j < filler->map_x)
-				{
-					if (filler->map[i_piece + i][j_piece + j])
-					{
-						if (filler->map[i_piece + i][j_piece + j] == filler->player || filler->map[i_piece + i][j_piece + j] == filler->player + 32)
-							++count;
-						if (filler->map[i_piece + i][j_piece + j] == filler->enemy || filler->map[i_piece + i][j_piece + j] == filler->enemy + 32)
-							return (0);
-					}
-					else
-						return (0);
-				}
-				else
+				if (small_check(filler, i_piece + i, j_piece + j, &count) == 0)
 					return (0);
-			}
 			++j_piece;
 		}
 		++i_piece;
@@ -73,45 +80,21 @@ int		check_heat(int **map, t_filler *filler, int i, int j)
 	return (total);
 }
 
-void	ft_clean_int_arr(int ***map)
+void	simple_placing(t_filler *filler, t_point *answer)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	if (!(map)[i])
-		return ;
-	while ((*map)[i])
-		i++;
-	while (j < i)
-	{
-		free((*map)[j]);
-		j++;
-	}
-	free(*map);
-}
-
-t_point		*simple_placing(t_filler *filler)
-{
-	t_point		*answer;
 	int			**map;
 	int			min_sum;
 	int			tmp;
 	int			i;
 	int			j;
 
-	i = 0;
+	i = -1;
 	min_sum = 1000000;
-	map = heatmap(filler->map);
-	answer = malloc(sizeof(t_point *));
-	answer->y = 0;
-	answer->x = 0;
-	while (filler->map[i])
+	map = heatmap(filler->player, filler->enemy, filler->map);
+	while (filler->map[++i])
 	{
-		j = 0;
-		while (filler->map[i][j])
-		{
+		j = -1;
+		while (filler->map[i][++j])
 			if (check_placement(filler, i, j) == 1)
 			{
 				tmp = check_heat(map, filler, i, j);
@@ -122,19 +105,18 @@ t_point		*simple_placing(t_filler *filler)
 					answer->x = j;
 				}
 			}
-			++j;
-		}
-		++i;
 	}
 	ft_clean_int_arr(&map);
-	return (answer);
 }
 
 int		solver(t_filler *filler)
 {
 	t_point	*answer;
 
-	answer = simple_placing(filler);
+	answer = malloc(sizeof(t_point *));
+	answer->y = 0;
+	answer->x = 0;
+	simple_placing(filler, answer);
 	ft_printf("%d %d\n", answer->y, answer->x);
 	free(answer);
 	return (0);

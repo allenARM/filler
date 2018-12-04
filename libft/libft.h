@@ -6,13 +6,15 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:19:46 by amelikia          #+#    #+#             */
-/*   Updated: 2018/11/27 14:49:06 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:58:53 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 42
+# define ENDL '\n'
+# define END '\0'
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -84,6 +86,7 @@ void				ft_bzero(void *s, size_t n);
 int					ft_sizeofint(int num, int base);
 char				**ft_create_arr(int height, int width);
 void				ft_clean_arr(char ***argv);
+void				ft_clean_int_arr(int ***map);
 
 typedef struct		s_list
 {

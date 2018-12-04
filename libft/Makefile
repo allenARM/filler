@@ -6,7 +6,7 @@
 #    By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/10 22:17:06 by amelikia          #+#    #+#              #
-#    Updated: 2018/11/27 14:49:57 by amelikia         ###   ########.fr        #
+#    Updated: 2018/12/04 15:00:00 by amelikia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,7 @@ CFILES = ./ft_atoi.c \
 		./ft_strtoupper.c \
 		./ft_clean_arr.c \
 		./ft_create_arr.c \
+		./ft_clean_int_arr.c \
 
 OFILES =   ./ft_atoi.o \
 		./ft_bzero.o \
@@ -185,6 +186,7 @@ OFILES =   ./ft_atoi.o \
 		./ft_strtoupper.o \
 		./ft_clean_arr.o \
 		./ft_create_arr.o \
+		./ft_clean_int_arr.o \
 
 all: $(NAME)
 

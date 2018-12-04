@@ -6,137 +6,56 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 13:54:14 by amelikia          #+#    #+#             */
-/*   Updated: 2018/12/03 21:31:07 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:15:12 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_charfind(char *s1, const char s2)
+int		read_from_fd_into_stock(int const fd, char **stock)
 {
-	char	*s1o;
-	char	*cpy;
+	static char	buff[BUFF_SIZE + 1] = { ENDL };
+	int			read_bytes;
+	char		*nstr;
 
-	cpy = ft_strnew(ft_strlen(s1) + 1);
-	cpy = ft_strcpy(cpy, s1);
-	s1o = cpy;
-	if (!s2)
-		return (cpy);
-	while (*cpy)
-		cpy++;
-	*cpy++ = s2;
-	*cpy = '\0';
-	free(s1);
-	return (s1o);
-}
-
-static int	clean_buffer(char *buff, char **line, int i, int first)
-{
-	while (buff[++i])
+	read_bytes = read(fd, buff, BUFF_SIZE);
+	if (read_bytes > 0)
 	{
-		if (buff[i] == -115)
-			continue ;
-		if (buff[i] == '\n' && first == 0)
-		{
-			*line[0] = 0;
-			buff[i] = -115;
-			return (1);
-		}
-		else if (buff[i] != '\n')
-		{
-			*line = ft_charfind(*line, buff[i]);
-			buff[i] = -115;
-			first = 1;
-		}
-		else if (buff[i] == '\n' && first == 1)
-		{
-			buff[i] = -115;
-			return (1);
-		}
+		buff[read_bytes] = '\0';
+		nstr = ft_strjoin(*stock, buff);
+		if (!nstr)
+			return (-1);
+		free(*stock);
+		*stock = nstr;
 	}
-	if (first == 1)
-		return (2);
-	return (0);
+	return (read_bytes);
 }
 
-static void	end(char *buff, char **line, int i, int first_p)
+int		get_next_line(int const fd, char **line)
 {
-	if (first_p == 1 && (buff[0] == '\n' || buff[0] == '\0'))
-		*line[0] = 0;
-	while (buff[++i])
+	static char	*stock = NULL;
+	char		*endl_index;
+	int			ret;
+
+	if (!stock && (stock = (char *)ft_memalloc(sizeof(char))) == NULL)
+		return (-1);
+	endl_index = ft_strchr(stock, ENDL);
+	while (endl_index == NULL)
 	{
-		if (first_p == -1)
-			buff[i] = -115;
-		else if (buff[i] != '\n')
+		ret = read_from_fd_into_stock(fd, &stock);
+		if (ret == 0)
 		{
-			if (first_p == 1)
-			{
-				*line[0] = buff[i];
-				first_p = 0;
-			}
-			else
-				*line = ft_charfind(*line, buff[i]);
-			buff[i] = -115;
+			if ((endl_index = ft_strchr(stock, '\0')) == stock)
+				return (0);
 		}
+		else if (ret < 0)
+			return (-1);
 		else
-		{
-			buff[i] = -115;
-			break ;
-		}
+			endl_index = ft_strchr(stock, ENDL);
 	}
-}
-
-static int	check_new(char *buff, char **line, int count, int *first_go)
-{
-	char	*tmp;
-	char	*tmp1;
-
-	if ((ft_strchr(buff, (int)'\n')) == NULL && *first_go)
-	{
-		*line = ft_strncpy(*line, buff, count);
-		first_go = 0;
-	}
-	else if ((ft_strchr(buff, (int)'\n')) == NULL)
-	{
-		tmp = (char *)ft_memalloc(sizeof(tmp) * (count + 1));
-		tmp = ft_strncpy(tmp, buff, count);
-		tmp1 = ft_strjoin(*line, tmp);
-		free(*line);
-		free(tmp);
-		*line = tmp1;
-	}
-	else if ((ft_strchr(buff, (int)'\n')) != NULL)
-	{
-		end(buff, line, (-1), *first_go);
-		return (1);
-	}
-	return (0);
-}
-
-int			get_next_line(const int fd, char **line)
-{
-	static char	buff[BUFF_SIZE];
-	int			first_p;
-	int			nb;
-	int			count;
-
-	if (BUFF_SIZE <= 0 || !line || (fd < 2 && fd != 0))
+	*line = ft_strsub(stock, 0, endl_index - stock);
+	if (!*line)
 		return (-1);
-	*line = (char *)ft_memalloc(sizeof(*line) * (BUFF_SIZE + 1));
-	first_p = 1;
-	if ((nb = clean_buffer(buff, line, -1, 0)) == 1)
-		return (1);
-	else
-		first_p = 0;
-	while ((count = read(fd, buff, BUFF_SIZE)) > 0)
-	{
-		if ((check_new(buff, line, count, &first_p)) == 1)
-			return (1);
-		end(buff, line, (-1), (-1));
-	}
-	if (count == -1)
-		return (-1);
-	if (nb == 2 || **line)
-		return (1);
-	return (0);
+	stock = ft_update(stock, ft_strdup(endl_index + 1));
+	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:45:47 by amelikia          #+#    #+#             */
-/*   Updated: 2018/12/03 18:57:09 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:44:28 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		**create_arr(char **map)
+int		**create_arr(char player, char enemy, char **map)
 {
 	int	i;
 	int	**res;
@@ -30,9 +30,9 @@ int		**create_arr(char **map)
 		res[i][(int)ft_strlen(map[0])] = 0;
 		j = -1;
 		while (++j < (int)ft_strlen(map[0]))
-			if (map[i][j] == 'x' || map[i][j] == 'X')
+			if (map[i][j] == enemy || map[i][j] == enemy + 32)
 				res[i][j] = 1;
-			else if (map[i][j] == 'o' || map[i][j] == 'O')
+			else if (map[i][j] == player || map[i][j] == player + 32)
 				res[i][j] = -2;
 			else
 				res[i][j] = -1;
@@ -94,12 +94,12 @@ int		fill_heatmap(int **res, int count)
 	return (check);
 }
 
-int		**heatmap(char **map)
+int		**heatmap(char player, char enemy, char **map)
 {
 	int	**res;
 	int	count;
 
-	res = create_arr(map);
+	res = create_arr(player, enemy, map);
 	count = 1;
 	while (fill_heatmap(res, count) == 1)
 		++count;

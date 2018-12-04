@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_clean_int_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/15 18:39:51 by amelikia          #+#    #+#             */
-/*   Updated: 2018/12/04 14:42:46 by amelikia         ###   ########.fr       */
+/*   Created: 2018/12/04 14:58:24 by amelikia          #+#    #+#             */
+/*   Updated: 2018/12/04 14:58:36 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-# define FILLER_H
-# include "../libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_point
+void	ft_clean_int_arr(int ***map)
 {
-	int			x;
-	int			y;
-}				t_point;
+	int i;
+	int j;
 
-typedef	struct	s_filler
-{
-	char		enemy;
-	char		player;
-	char		**map;
-	int			map_x;
-	int			map_y;
-	char		**piece;
-	int			piece_x;
-	int			piece_y;
-}				t_filler;
-
-int				solver(t_filler *filler);
-int				**heatmap(char player, char enemy, char **map);
-
-#endif
+	i = 0;
+	j = 0;
+	if (!(map)[i])
+		return ;
+	while ((*map)[i])
+		i++;
+	while (j < i)
+	{
+		free((*map)[j]);
+		j++;
+	}
+	free(*map);
+}
