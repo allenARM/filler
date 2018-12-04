@@ -1,6 +1,6 @@
 #include "filler.h"
 
-int         check_placement(t_filler *filler, int i, int j)
+int		check_placement(t_filler *filler, int i, int j)
 {
 	int	i_piece;
 	int	j_piece;
@@ -61,6 +61,25 @@ int		check_heat(int **map, t_filler *filler, int i, int j)
 	return (total);
 }
 
+void	ft_clean_int_arr(int ***map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (!(map)[i])
+		return ;
+	while ((*map)[i])
+		i++;
+	while (j < i)
+	{
+		free((*map)[j]);
+		j++;
+	}
+	free(*map);
+}
+
 t_point		*simple_placing(t_filler *filler)
 {
 	t_point		*answer;
@@ -90,37 +109,21 @@ t_point		*simple_placing(t_filler *filler)
 					answer->y = i;
 					answer->x = j;
 				}
-				// return (answer);
 			}
 			++j;
 		}
 		++i;
 	}
+	ft_clean_int_arr(&map);
 	return (answer);
 }
 
-int         solver(t_filler *filler)
+int		solver(t_filler *filler)
 {
-	t_point     *answer;
-
-	answer = malloc(sizeof(t_point *));
-	// answer = NULL;
-
-	// t_filler temp;
-	// temp = filler;
-
-	// int i;
-	// i = 0;
-	// while (filler->map[i])
-  //   ft_printf("%s\n", filler->map[i++]);
-	// i = 0;
-	// ft_printf("|\n");
-	// while (filler->piece[i])
-  //   ft_printf("%s\n", filler->piece[i++]);
+	t_point	*answer;
 
 	answer = simple_placing(filler);
-
 	ft_printf("%d %d\n", answer->y, answer->x);
-	// write(1, "8 2\n", 4);
+	free(answer);
 	return (0);
 }
