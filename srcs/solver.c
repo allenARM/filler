@@ -28,14 +28,14 @@ int         check_placement(t_filler *filler, int i, int j)
 					else
 						return (0);
 				}
+				else
+					return (0);
 			}
 			++j_piece;
 		}
 		++i_piece;
 	}
-	if (count == 1)
-		return (1);
-	return (0);
+	return (count);
 }
 
 int		check_heat(int **map, t_filler *filler, int i, int j)
@@ -66,7 +66,7 @@ t_point		*simple_placing(t_filler *filler)
 	t_point		*answer;
 	int			**map;
 	int			min_sum;
-	// int			tmp;
+	int			tmp;
 	int			i;
 	int			j;
 
@@ -83,14 +83,14 @@ t_point		*simple_placing(t_filler *filler)
 		{
 			if (check_placement(filler, i, j) == 1)
 			{
-				// tmp = check_heat(map, filler, i, j);
-				// if (min_sum > tmp)
-				// {
-				// 	min_sum = tmp;
+				tmp = check_heat(map, filler, i, j);
+				if (min_sum > tmp)
+				{
+					min_sum = tmp;
 					answer->y = i;
 					answer->x = j;
-				// }
-				return (answer);
+				}
+				// return (answer);
 			}
 			++j;
 		}
