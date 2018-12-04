@@ -56,7 +56,7 @@ void		define_players(t_filler *filler, char *line)
 	}
 }
 
-void	read_map(t_filler *filler, char *line, int *index)
+void	read_everything(t_filler *filler, char *line, int *index)
 {
 	if (!filler->player)
 		define_players(filler, line);
@@ -68,10 +68,6 @@ void	read_map(t_filler *filler, char *line, int *index)
 		if (*(index) == filler->map_y)
 			*index = 0;
 	}
-}
-
-void	read_piece(t_filler *filler, char *line, int *index)
-{
 	if (ft_strstr(line, "Piece"))
 		define_piece(filler, line);
 	if (filler->piece && (line[0] == '*' || line[0] == '.'))
@@ -86,16 +82,32 @@ void	read_piece(t_filler *filler, char *line, int *index)
 	}
 }
 
-void	reading_loop(t_filler *filler, char *line, int index)
-{
-	while (get_next_line(0, &line) > 0)
-	{
-		read_map(filler, line, &index);
-		read_piece(filler, line, &index);
-		ft_strdel(&line);
-	}
-	ft_clean_arr(&filler->map);
-}
+// void	read_piece(t_filler *filler, char *line, int *index)
+// {
+// 	if (ft_strstr(line, "Piece"))
+// 		define_piece(filler, line);
+// 	if (filler->piece && (line[0] == '*' || line[0] == '.'))
+// 	{
+// 		ft_strcpy(filler->piece[(*index)++], line);
+// 		if (*(index) == filler->piece_y)
+// 		{
+// 			*index = 0;
+// 			solver(filler);
+// 			ft_clean_arr(&filler->piece);
+// 		}
+// 	}
+// }
+
+// void	reading_loop(t_filler *filler, char *line, int index)
+// {
+// 	while (get_next_line(0, &line) > 0)
+// 	{
+// 		read_map(filler, line, &index);
+// 		read_piece(filler, line, &index);
+// 		ft_strdel(&line);
+// 	}
+// 	ft_clean_arr(&filler->map);
+// }
 
 int		main(void)
 {
@@ -106,6 +118,11 @@ int		main(void)
 	index = 0;
 	ft_bzero(&filler, sizeof(t_filler));
 	line = NULL;
-	reading_loop(&filler, line, index);
+	while (get_next_line(0, &line) > 0)
+	{
+		read_everything(&filler, line, &index);
+		ft_strdel(&line);
+	}
+	ft_clean_arr(&filler.map);
 	return (0);
 }
