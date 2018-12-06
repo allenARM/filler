@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:45:47 by amelikia          #+#    #+#             */
-/*   Updated: 2018/12/04 14:44:28 by amelikia         ###   ########.fr       */
+/*   Updated: 2018/12/05 19:34:20 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int		**create_arr(char player, char enemy, char **map)
 	count_i = 0;
 	while (map[count_i])
 		++count_i;
-	res = (int **)malloc(sizeof(int *) * count_i + 1);
+	res = (int **)malloc(sizeof(int *) * (count_i + 1));
 	i = -1;
 	while (++i < count_i)
 	{
-		res[i] = (int *)malloc(sizeof(int) * (int)ft_strlen(map[0]) + 1);
+		res[i] = (int *)malloc(sizeof(int) * ((int)ft_strlen(map[0]) + 1));
 		res[i][(int)ft_strlen(map[0])] = 0;
 		j = -1;
 		while (++j < (int)ft_strlen(map[0]))
@@ -45,20 +45,20 @@ int		check_sides(int **res, int i, int j, int count)
 {
 	if (res[i][j + 1] && res[i][j + 1] == count)
 		return (1);
-	else if (res[i][j - 1] && res[i][j - 1] == count)
+	else if (j != 0 && res[i][j - 1] && res[i][j - 1] == count)
 		return (1);
 	if (i != 0)
 	{
-		if (res[i - 1][j - 1] && res[i - 1][j - 1] == count)
+		if (j != 0 && i != 0 && res[i - 1][j - 1] && res[i - 1][j - 1] == count)
 			return (1);
-		else if (res[i - 1][j] && res[i - 1][j] == count)
+		else if (i != 0 && res[i - 1][j] && res[i - 1][j] == count)
 			return (1);
-		else if (res[i - 1][j + 1] && res[i - 1][j + 1] == count)
+		else if (i != 0 && res[i - 1][j + 1] && res[i - 1][j + 1] == count)
 			return (1);
 	}
 	if (res[i + 1])
 	{
-		if (res[i + 1][j - 1] && res[i + 1][j - 1] == count)
+		if (j != 0 && res[i + 1][j - 1] && res[i + 1][j - 1] == count)
 			return (1);
 		else if (res[i + 1][j] && res[i + 1][j] == count)
 			return (1);

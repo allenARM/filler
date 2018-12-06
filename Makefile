@@ -23,7 +23,7 @@ all: $(EXEC)
 
 $(EXEC):
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(LIB_FILLLER)$(RESET)"
-	@gcc -Wall -Wextra -Werror $(SRCS) $(INCLUDES) -c -g
+	@gcc -Wall -Wextra -Werror $(SRCS) $(INCLUDES) -c -fsanitize=address -fsanitize=undefined -g
 	@echo "$(GREEN)Compiling $(GREEN_EXTRA)$(LIB_FILLLER)$(RESET)"
 	@ar rc $(LIB_FILLLER) *.o
 	@ranlib $(LIB_FILLLER)
@@ -32,7 +32,7 @@ $(EXEC):
 	@mv *.o $(OBJ)
 	@make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC)$(RESET)"
-	@gcc -Wall -Wextra -Werror $(LIB_FILLLER) $(LIBFT) $(INCLUDES) -o $(EXEC) -g
+	@gcc -Wall -Wextra -Werror $(LIB_FILLLER) $(LIBFT) $(INCLUDES) -o $(EXEC) -g -fsanitize=address -fsanitize=undefined
 	@echo "$(BLUE_EXTRA)$(EXEC)$(BLUE): Complete$(RESET)"
 
 clean:
